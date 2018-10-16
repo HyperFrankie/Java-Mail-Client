@@ -62,6 +62,7 @@ public class EmailUtil {
 			Message message = messages[messages.length - 1];
 			System.out.println("---------------------------------");
 			System.out.println("Email Number " + (messages.length));
+			System.out.println("Received on: " + message.getReceivedDate());
 			System.out.println("Subject: " + message.getSubject());
 			System.out.println("From: " + message.getFrom()[0]);
 			System.out.println("Text: " + message.getContent().toString());
