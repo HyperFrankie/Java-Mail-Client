@@ -1,18 +1,13 @@
 import GUI.GUIUtil;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import javax.mail.Session;
 import java.io.IOException;
 
-public class MainScreenController {
+public class MainScreenController implements Login {
 
     public static Session session;
 
@@ -32,14 +27,16 @@ public class MainScreenController {
     }
 
     public void postInit() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("loginScreen.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(MainScreenStart.stage);
-        stage.setTitle("Login");
-        stage.show();
+        LoginScreenController.addLoginRequest(this);
     }
 
+    @Override
+    public void loginSucces(Session session) {
+        System.out.println("Login request method got reply from login utils");
+    }
+
+    @Override
+    public void loginFailure() {
+
+    }
 }
