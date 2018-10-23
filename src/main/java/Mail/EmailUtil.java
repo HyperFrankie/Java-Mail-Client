@@ -21,7 +21,7 @@ public class EmailUtil {
 		IMAPHosts.put("hotmail.nl", "imap-mail.outlook.com");
 	}
 
-	public static void login(String loginMail, String loginPassword) {
+	public static Session login(String loginMail, String loginPassword) {
 		final String mail = loginMail;
 		final String pass = loginPassword;
 
@@ -41,48 +41,41 @@ public class EmailUtil {
 			props.put("mail.imap.auth", "true");
 			props.put("mail.imap.ssl.enable", "true");
 
-			Session session = Session.getInstance(props, auth);
+			return Session.getInstance(props, auth);
 
-
-
-
-			Store store = session.getStore("imap");
-			try {
-				store.connect();
-			} catch (AuthenticationFailedException e) {
-				System.out.println("authentication failed");
-				System.out.println("message: " + e.getMessage());
-			}
-
-			System.out.println("Personal folder list:" + store.getPersonalNamespaces());
-			System.out.println("Shared folder list:" + store.getSharedNamespaces());
-
-			Folder emailFolder = store.getFolder("INBOX");
-			emailFolder.open(Folder.READ_ONLY);
-
-			System.out.println(emailFolder.getFullName());
-
-			Message[] messages = emailFolder.getMessages();
-			System.out.println("messages.length---" + messages.length);
-
-			Message message = messages[messages.length - 1];
-			System.out.println("---------------------------------");
-			System.out.println("Email Number " + (messages.length));
-			System.out.println("Received on: " + message.getReceivedDate());
-			System.out.println("Subject: " + message.getSubject());
-			System.out.println("From: " + message.getFrom()[0]);
-			System.out.println("Text: " + message.getContent().toString());
+//			Store store = session.getStore("imap");
+//			try {
+//				store.connect();
+//			} catch (AuthenticationFailedException e) {
+//				System.out.println("authentication failed");
+//				System.out.println("message: " + e.getMessage());
+//			}
+//
+//			System.out.println("Personal folder list:" + store.getPersonalNamespaces());
+//			System.out.println("Shared folder list:" + store.getSharedNamespaces());
+//
+//			Folder emailFolder = store.getFolder("INBOX");
+//			emailFolder.open(Folder.READ_ONLY);
+//
+//			System.out.println(emailFolder.getFullName());
+//
+//			Message[] messages = emailFolder.getMessages();
+//			System.out.println("messages.length---" + messages.length);
+//
+//			Message message = messages[messages.length - 1];
+//			System.out.println("---------------------------------");
+//			System.out.println("Email Number " + (messages.length));
+//			System.out.println("Received on: " + message.getReceivedDate());
+//			System.out.println("Subject: " + message.getSubject());
+//			System.out.println("From: " + message.getFrom()[0]);
+//			System.out.println("Text: " + message.getContent().toString());
 
 		} catch(UnknownHostException ex) {
 			System.out.println("Unrecognized host");
-		} catch (NoSuchProviderException e) {
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		return null;
 	}
 
 	public void getAccordingIMAPHost(String provider) {

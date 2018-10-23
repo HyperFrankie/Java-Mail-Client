@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginScreenController">
+<AnchorPane fx:id="loginScreen" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginScreenController">
    <children>
       <HBox layoutX="10.0" layoutY="10.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -22,7 +22,7 @@
                   <Insets top="4.0" />
                </padding>
             </VBox>
-            <VBox prefWidth="200.0" spacing="5.0">
+            <VBox fx:id="loginInformation" prefWidth="200.0" spacing="5.0">
                <children>
                   <TextField fx:id="loginMail" promptText="example@example.com" />
                   <PasswordField fx:id="loginPass" promptText="Password" />

@@ -9,9 +9,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.mail.Session;
 import java.io.IOException;
 
 public class MainScreenController {
+
+    public static Session session;
 
     @FXML
     BorderPane borderPane;
