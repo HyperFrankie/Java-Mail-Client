@@ -51,10 +51,16 @@ public class EmailUtil {
 				store.connect();
 			} catch (AuthenticationFailedException e) {
 				System.out.println("authentication failed");
+				System.out.println("message: " + e.getMessage());
 			}
+
+			System.out.println("Personal folder list:" + store.getPersonalNamespaces());
+			System.out.println("Shared folder list:" + store.getSharedNamespaces());
 
 			Folder emailFolder = store.getFolder("INBOX");
 			emailFolder.open(Folder.READ_ONLY);
+
+			System.out.println(emailFolder.getFullName());
 
 			Message[] messages = emailFolder.getMessages();
 			System.out.println("messages.length---" + messages.length);
@@ -66,15 +72,6 @@ public class EmailUtil {
 			System.out.println("Subject: " + message.getSubject());
 			System.out.println("From: " + message.getFrom()[0]);
 			System.out.println("Text: " + message.getContent().toString());
-
-//			for (int i = messages.length - 1, n = messages.length - 3; i < n; i--) {
-//				Message message = messages[i];
-//				System.out.println("---------------------------------");
-//				System.out.println("Email Number " + (i + 1));
-//				System.out.println("Subject: " + message.getSubject());
-//				System.out.println("From: " + message.getFrom()[0]);
-//				System.out.println("Text: " + message.getContent().toString());
-//			}
 
 		} catch(UnknownHostException ex) {
 			System.out.println("Unrecognized host");

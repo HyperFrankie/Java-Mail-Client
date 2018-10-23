@@ -28,8 +28,8 @@
                   <PasswordField fx:id="loginPass" promptText="Password" />
                   <HBox alignment="TOP_RIGHT" spacing="5.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Cancel" />
-                        <Button mnemonicParsing="false" onAction="#login" text="Login" />
+                        <Button cancelButton="true" mnemonicParsing="false" text="Cancel" />
+                        <Button defaultButton="true" mnemonicParsing="false" onAction="#login" text="Login" />
                      </children></HBox>
                </children>
             </VBox>
