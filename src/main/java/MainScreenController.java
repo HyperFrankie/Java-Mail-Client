@@ -1,10 +1,13 @@
 import GUI.GUIUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
-import javax.mail.Session;
+import javax.mail.*;
 import java.io.IOException;
 
 public class MainScreenController implements Login {
@@ -13,6 +16,8 @@ public class MainScreenController implements Login {
 
     @FXML
     BorderPane borderPane;
+    @FXML
+    ListView emailList;
     @FXML
     ImageView inboxIcon;
 
@@ -32,7 +37,23 @@ public class MainScreenController implements Login {
 
     @Override
     public void loginSucces(Session session) {
-        System.out.println("Login request method got reply from login utils");
+        System.out.println("Login request got success reply from login utils");
+        try {
+            Store imapStore = session.getStore("imap");
+            imapStore.connect();
+            Folder inboxFolder = imapStore.getFolder("INBOX");
+			inboxFolder.open(Folder.READ_ONLY);
+			Message[] messages = inboxFolder.getMessages();
+            ObservableList<String> emails = FXCollections.observableArrayList();
+			for(int i = messages.length - 1; i >= messages.length - 20; i--) {
+			    emails.add(messages[i].getSubject());
+            }
+            emailList.setItems(emails);
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
